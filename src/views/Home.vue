@@ -95,7 +95,7 @@ export default defineComponent({
           .create({
             header: 'Time Figther 1.0',
             subHeader: 'Creat per Sergi Tur Badenas',
-            message: 'Podeu trobar el codi font a: <a href="https://github.com/acacha/ComptadorIonic">https://github.com/acacha/ComptadorIonic</a>',
+            message: 'Podeu trobar el codi font a: <a href="https://github.com/l3lackJack/ComptadorIonic">https://github.com/l3lackJack/ComptadorIonic</a>',
             buttons: ['OK'],
           });
       await alert.present();
