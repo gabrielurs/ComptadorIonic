@@ -18,8 +18,6 @@
             <ion-col>
               <div class="ion-text-start"> Your Score:{{ score }}</div>
             </ion-col>
-          </ion-row>
-          <ion-row>
             <ion-col>
               <div class="ion-text-end">Time Left: {{ timeLeft }}</div>
             </ion-col>
@@ -94,7 +92,7 @@ export default defineComponent({
       const alert = await alertController
           .create({
             header: 'Time Figther 1.0',
-            subHeader: 'Creat per Sergi Tur Badenas',
+            subHeader: 'Creat per Gabriel Urs',
             message: 'Podeu trobar el codi font a: <a href="https://github.com/l3lackJack/ComptadorIonic">https://github.com/l3lackJack/ComptadorIonic</a>',
             buttons: ['OK'],
           });
