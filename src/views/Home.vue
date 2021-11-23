@@ -45,10 +45,11 @@ import {
   IonIcon,
   IonPage, IonRow,
   IonTitle,
-  IonToolbar, toastController,
+  IonToolbar, toastController
 } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import {informationCircleOutline} from 'ionicons/icons'
+import { informationCircleOutline } from "ionicons/icons";
+const INITIAL_TIME = 5
 export default defineComponent({
   name: 'Home',
   components: {
@@ -64,31 +65,56 @@ export default defineComponent({
     IonRow,
     IonCol
   },
-  setup(){
-    return{
+  setup () {
+    return {
       infoIcon: informationCircleOutline,
-      score: 0,
-      timeLeft: 60
+      started: false,
+      counterInterval: null,
     }
   },
-  methods :{
-    async info(){
+  data () {
+    return {
+      score: 0,
+      timeLeft: INITIAL_TIME
+    }
+  },
+  watch: {
+    timeLeft: function(newTimeLeft) {
+      if (newTimeLeft <= 0) {
+        this.started = false
+        this.timeLeft = INITIAL_TIME
+        clearInterval(this.counterInterval)
+        this.showResult()
+        this.score = 0
+      }
+    }
+  },
+  methods: {
+    async info() {
       const alert = await alertController
           .create({
-            header: 'Time Fighter 1.0',
-            subHeader: 'Creat per Gabriel Urs',
-            message: 'Codi font: <a href="https://github.com/l3lackJack/ComptadorIonic">https://github.com/l3lackJack/ComptadorIonic</a>',
+            header: 'Time Figther 1.0',
+            subHeader: 'Creat per Sergi Tur Badenas',
+            message: 'Podeu trobar el codi font a: <a href="https://github.com/acacha/ComptadorIonic">https://github.com/acacha/ComptadorIonic</a>',
             buttons: ['OK'],
           });
       await alert.present();
     },
-    async tap(){
-      console.log('TODO TAP ME');
-      //TOAST
+    tap () {
+      this.score++
+      if (!this.started) {
+        this.counterInterval = setInterval(() => {
+          this.timeLeft--
+        },1000)
+        this.started = true
+      }
+    },
+    async showResult() {
+      // TOAST
       const toast = await toastController.create({
         color: 'dark',
         duration: 2000,
-        message: 'Paired successfully',
+        message: `Time's Up. Your Score was ${this.score}`,
         showCloseButton: true
       });
       await toast.present();
